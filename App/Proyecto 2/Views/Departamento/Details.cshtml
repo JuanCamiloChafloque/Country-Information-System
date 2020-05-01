@@ -4,10 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles del Departamento</h2>
 
 <div>
     <h4>Departamento</h4>
+    <p>
+        @Html.ActionLink("Agregar Ciudad", "../Ciudad/Create", new { id = Model.Id })
+    </p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,8 +30,33 @@
         </dd>
 
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudades)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Ciudades)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCiudad)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "../Ciudad/Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "../Ciudad/Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar Departamento", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista de departamentos", "Index")
 </p>

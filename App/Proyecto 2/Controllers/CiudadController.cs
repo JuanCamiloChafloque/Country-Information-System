@@ -12,6 +12,7 @@ using Proyecto_2.Data;
 
 namespace Proyecto_2.Controllers
 {
+    [Authorize(Roles = "Usuario")]
     public class CiudadController : Controller
     {
         // GET: Ciudad

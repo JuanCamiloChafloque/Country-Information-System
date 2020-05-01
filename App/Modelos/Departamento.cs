@@ -16,6 +16,8 @@ namespace Modelos
 
         [Display (Name = "Nombre del país")]
         public Pais Pais { get; set; }
+
+        [Display (Name = "Lista de ciudades")]
         public List<Ciudad> Ciudades { get; set; }
     }
 }

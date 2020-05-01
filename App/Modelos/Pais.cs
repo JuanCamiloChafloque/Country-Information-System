@@ -13,6 +13,8 @@ namespace Modelos
 
         [Display (Name = "Nombre del país")]
         public string NombrePais { get; set; }
+
+        [Display (Name = "Lista de departamentos")]
         public List<Departamento> Departamentos { get; set; }
     }
 }
