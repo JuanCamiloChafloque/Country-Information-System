@@ -1,0 +1,16 @@
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\Repositorio.dll.config
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\Repositorio.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\Repositorio.pdb
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\EntityFramework.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\Modelos.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\Modelos.pdb
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\EntityFramework.xml
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\bin\Debug\es\EntityFramework.SqlServer.resources.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\obj\Debug\Repositorio.csprojAssemblyReference.cache
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\obj\Debug\Repositorio.csproj.CoreCompileInputs.cache
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\obj\Debug\Repositorio.csproj.CopyComplete
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\obj\Debug\Repositorio.dll
+C:\Users\Martin Chafloque\source\repos\Proyecto 2\Repositorio\obj\Debug\Repositorio.pdb
