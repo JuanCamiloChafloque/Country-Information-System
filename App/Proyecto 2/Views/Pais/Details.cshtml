@@ -9,7 +9,7 @@
 <div>
     <h4>País</h4>
     <p>
-        @Html.ActionLink("Agregar Departamento", "../Departamento/Create", new { id = Model.Id })
+        @Html.ActionLink("Agregar Departamento a país", "../Departamento/Create", new { id = Model.Id })
     </p>
     <hr />
     <dl class="dl-horizontal">
@@ -38,7 +38,7 @@
                 <td>
                     @Html.ActionLink("Editar", "../Departamento/Edit", new { id = item.Id }) |
                     @Html.ActionLink("Detalles", "../Departamento/Details", new { id = item.Id }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Eliminar", "../Departamento/Delete", new { id = item.Id })
                 </td>
             </tr>
         }

@@ -40,7 +40,8 @@ namespace Repositorio
                 var entity = new Ciudades
                 {
                     Id = ciudad.Id,
-                    NombreCiudad = ciudad.NombreCiudad
+                    NombreCiudad = ciudad.NombreCiudad,
+                    DepartamentoId = ciudad.Departamento.Id
                 };
 
                 contexto.Ciudades.Add(entity);

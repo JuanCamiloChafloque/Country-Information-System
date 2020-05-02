@@ -39,20 +39,24 @@ namespace Proyecto_2.Controllers
             return View(departamento);
         }
 
-        // GET: Departamento/Create
-        public ActionResult Create()
+        // GET: Departamento/Create/5
+        public ActionResult Create(int? id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
         // POST: Departamento/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NombreDepartamento")] Departamento departamento)
+        public ActionResult Create([Bind(Include = "Id,NombreDepartamento")] Departamento departamento, String idPais)
         {
+                       
             if (ModelState.IsValid)
             {
+                var logicPais = new PaisLogica();
                 var logic = new DepartamentoLogica();
+                departamento.Pais = logicPais.getPaisById(Int32.Parse(idPais));
                 logic.crearDepartamento(departamento);
                 return RedirectToAction("Index");
             }

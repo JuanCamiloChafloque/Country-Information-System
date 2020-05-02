@@ -3,4 +3,3 @@ C:\Users\Martin Chafloque\source\repos\Proyecto 2\Modelos\bin\Debug\Modelos.pdb
 C:\Users\Martin Chafloque\source\repos\Proyecto 2\Modelos\obj\Debug\Modelos.csproj.CoreCompileInputs.cache
 C:\Users\Martin Chafloque\source\repos\Proyecto 2\Modelos\obj\Debug\Modelos.dll
 C:\Users\Martin Chafloque\source\repos\Proyecto 2\Modelos\obj\Debug\Modelos.pdb
-C:\Users\Martin Chafloque\source\repos\Proyecto 2\Modelos\obj\Debug\Modelos.csprojAssemblyReference.cache

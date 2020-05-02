@@ -39,20 +39,23 @@ namespace Proyecto_2.Controllers
             return View(ciudad);
         }
 
-        // GET: Ciudad/Create
-        public ActionResult Create()
+        // GET: Ciudad/Create/5
+        public ActionResult Create(int? id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
         // POST: Ciudad/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NombreCiudad")] Ciudad ciudad)
+        public ActionResult Create([Bind(Include = "Id,NombreCiudad")] Ciudad ciudad, String idDep)
         {
             if (ModelState.IsValid)
             {
+                var logicDep = new DepartamentoLogica();
                 var logic = new CiudadLogica();
+                ciudad.Departamento = logicDep.getDepartamentoById(Int32.Parse(idDep));
                 logic.crearCiudad(ciudad);
                 return RedirectToAction("Index");
             }

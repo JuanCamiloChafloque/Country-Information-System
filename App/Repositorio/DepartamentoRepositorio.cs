@@ -40,9 +40,9 @@ namespace Repositorio
                 var entity = new Departamentos
                 {
                     Id = dep.Id,
-                    NombreDepartamento = dep.NombreDepartamento
+                    NombreDepartamento = dep.NombreDepartamento,
+                    PaisId = dep.Pais.Id
                 };
-
                 contexto.Departamentos.Add(entity);
                 return Convert.ToBoolean(contexto.SaveChanges());
             }
