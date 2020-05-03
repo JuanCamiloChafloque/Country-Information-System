@@ -42,6 +42,8 @@ namespace Proyecto_2.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
+            var logic = new UsuarioLogica();
+            ViewBag.ComboRoles = logic.obtenerRoles();
             return View();
         }
 

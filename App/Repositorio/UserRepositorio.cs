@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Repositorio
 {
@@ -29,6 +30,20 @@ namespace Repositorio
             }
         }
 
+        public List<SelectListItem> obtenerRoles()
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var list = contexto.AspNetRoles.Select(r => new SelectListItem()
+                {
+                    Text = r.Name,
+                    Value = r.Id
+                }).ToList();
+
+                return list;
+            }
+        }
+
         public bool crearUsuario(Usuario usuario)
         {
             using (var contexto = new dbProwebNETEntities())
@@ -37,7 +52,7 @@ namespace Repositorio
                 {
                     Id = usuario.Id,
                     Email = usuario.Email,
-                    UserName = usuario.UserName
+                    UserName = usuario.UserName,
                 };
 
                 contexto.AspNetUsers.Add(entity);
@@ -75,7 +90,7 @@ namespace Repositorio
                     return;
                 }
                 usuarioEncontrado.Email = usuario.Email;
-                usuarioEncontrado.UserName = usuario.UserName;
+                usuarioEncontrado.UserName = usuario.Email;
                 contexto.SaveChanges();
             }
         }

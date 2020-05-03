@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Modelos;
 using Repositorio;
 
@@ -14,6 +15,12 @@ namespace Logica
         {
             var repositorio = new UserRepositorio();
             return repositorio.obtenerUsuarios();
+        }
+
+        public List<SelectListItem> obtenerRoles()
+        {
+            var repositorio = new UserRepositorio();
+            return repositorio.obtenerRoles();
         }
 
         public bool crearUsuario(Usuario usuario)
