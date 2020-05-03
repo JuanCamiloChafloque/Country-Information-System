@@ -1,0 +1,97 @@
+﻿using Modelos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositorio
+{
+    public class UserRepositorio
+    {
+        public List<Usuario> obtenerUsuarios()
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var list = contexto.AspNetUsers.Select(u => new Usuario
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    Roles = u.AspNetRoles.Select(r => new Rol
+                    {
+                        Id = r.Id,
+                        Nombre = r.Name
+                    }).ToList()
+                }).ToList();
+
+                return list;
+            }
+        }
+
+        public bool crearUsuario(Usuario usuario)
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var entity = new AspNetUsers
+                {
+                    Id = usuario.Id,
+                    Email = usuario.Email,
+                    UserName = usuario.UserName
+                };
+
+                contexto.AspNetUsers.Add(entity);
+                return Convert.ToBoolean(contexto.SaveChanges());
+            }
+        }
+
+        public Usuario getUsuarioById(String id)
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var usuario = contexto.AspNetUsers.Select(u => new Usuario
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    Roles = u.AspNetRoles.Select(r => new Rol
+                    {
+                        Id = r.Id,
+                        Nombre = r.Name
+                    }).ToList()
+                }).FirstOrDefault(u => u.Id == id);
+
+                return usuario;
+            }
+        }
+
+        public void updateUsuario(Usuario usuario)
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var usuarioEncontrado = contexto.AspNetUsers.Find(usuario.Id);
+                if (usuarioEncontrado == null)
+                {
+                    return;
+                }
+                usuarioEncontrado.Email = usuario.Email;
+                usuarioEncontrado.UserName = usuario.UserName;
+                contexto.SaveChanges();
+            }
+        }
+
+        public void deleteUsuario(String id)
+        {
+            using (var contexto = new dbProwebNETEntities())
+            {
+                var usuarioEncontrado = contexto.AspNetUsers.Find(id);
+                if (usuarioEncontrado == null)
+                {
+                    return;
+                }
+                contexto.AspNetUsers.Remove(usuarioEncontrado);
+                contexto.SaveChanges();
+            }
+        }
+    }
+}

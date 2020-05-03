@@ -24,5 +24,7 @@ namespace Proyecto_2.Data
         public System.Data.Entity.DbSet<Modelos.Departamento> Departamentoes { get; set; }
 
         public System.Data.Entity.DbSet<Modelos.Ciudad> Ciudads { get; set; }
+
+        public System.Data.Entity.DbSet<Modelos.Usuario> Usuarios { get; set; }
     }
 }
