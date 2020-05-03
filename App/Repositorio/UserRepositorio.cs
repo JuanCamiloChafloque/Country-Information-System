@@ -30,14 +30,14 @@ namespace Repositorio
             }
         }
 
-        public List<SelectListItem> obtenerRoles()
+        public List<Rol> obtenerRoles()
         {
             using (var contexto = new dbProwebNETEntities())
             {
-                var list = contexto.AspNetRoles.Select(r => new SelectListItem()
+                var list = contexto.AspNetRoles.Select(r => new Rol
                 {
-                    Text = r.Name,
-                    Value = r.Id
+                    Id = r.Id,
+                    Nombre = r.Name
                 }).ToList();
 
                 return list;

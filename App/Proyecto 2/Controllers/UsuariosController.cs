@@ -88,14 +88,14 @@ namespace Proyecto_2.Controllers
         public ActionResult Create()
         {
             var logic = new UsuarioLogica();
-            ViewBag.ComboRoles = logic.obtenerRoles();
+            ViewBag.CRoles = logic.obtenerRoles();
             return View();
         }
 
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Email,Password")] Usuario usuario)
+        public async Task<ActionResult> Create([Bind(Include = "Email,Password")] Usuario usuario, String[] CRoles)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,13 @@ namespace Proyecto_2.Controllers
                 if (result.Succeeded)
                 {
                     var currentUser = UserManager.FindByName(user.UserName);
-                    var roleResult = UserManager.AddToRole(currentUser.Id, "Administrador");
+                    if(CRoles != null)
+                    {
+                        foreach(var r in CRoles)
+                        {
+                            var roleResult = UserManager.AddToRole(currentUser.Id, r);
+                        }
+                    }
                     return RedirectToAction("Index");
                 }
             }
@@ -121,6 +127,7 @@ namespace Proyecto_2.Controllers
             }
             var logic = new UsuarioLogica();
             Usuario usuario = logic.getUsuarioById(id);
+            ViewBag.CRoles = logic.obtenerRoles();
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -131,12 +138,22 @@ namespace Proyecto_2.Controllers
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,UserName")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "Id,Email,UserName")] Usuario usuario, String[] CRoles)
         {
             if (ModelState.IsValid)
             {
                 var logic = new UsuarioLogica();
                 logic.updateUsuario(usuario);
+                var currentUser = UserManager.FindByName(usuario.Email);
+                if (CRoles != null)
+                {
+                    UserManager.RemoveFromRole(currentUser.Id, "Administrador");
+                    UserManager.RemoveFromRole(currentUser.Id, "Usuario");
+                    foreach (var r in CRoles)
+                    {
+                        var roleResult = UserManager.AddToRole(currentUser.Id, r);
+                    }
+                }
                 return RedirectToAction("Index");
             }
             return View(usuario);

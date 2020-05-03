@@ -17,7 +17,7 @@ namespace Logica
             return repositorio.obtenerUsuarios();
         }
 
-        public List<SelectListItem> obtenerRoles()
+        public List<Rol> obtenerRoles()
         {
             var repositorio = new UserRepositorio();
             return repositorio.obtenerRoles();
