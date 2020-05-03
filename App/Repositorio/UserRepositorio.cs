@@ -44,22 +44,6 @@ namespace Repositorio
             }
         }
 
-        public bool crearUsuario(Usuario usuario)
-        {
-            using (var contexto = new dbProwebNETEntities())
-            {
-                var entity = new AspNetUsers
-                {
-                    Id = usuario.Id,
-                    Email = usuario.Email,
-                    UserName = usuario.UserName,
-                };
-
-                contexto.AspNetUsers.Add(entity);
-                return Convert.ToBoolean(contexto.SaveChanges());
-            }
-        }
-
         public Usuario getUsuarioById(String id)
         {
             using (var contexto = new dbProwebNETEntities())

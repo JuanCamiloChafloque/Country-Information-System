@@ -23,12 +23,6 @@ namespace Logica
             return repositorio.obtenerRoles();
         }
 
-        public bool crearUsuario(Usuario usuario)
-        {
-            var repositorio = new UserRepositorio();
-            return repositorio.crearUsuario(usuario);
-        }
-
         public Usuario getUsuarioById(String id)
         {
             var repositorio = new UserRepositorio();

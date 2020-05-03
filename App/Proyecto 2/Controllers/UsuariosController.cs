@@ -2,19 +2,64 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Linq;
+using System.Globalization;
+using System.Security.Claims;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Logica;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Modelos;
 using Proyecto_2.Data;
+using Proyecto_2.Models;
 
 namespace Proyecto_2.Controllers
 {
     [Authorize (Roles ="Administrador")]
     public class UsuariosController : Controller
     {
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public UsuariosController()
+        {
+
+        }
+
+        public UsuariosController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: Usuarios
         public ActionResult Index()
         {
@@ -50,13 +95,18 @@ namespace Proyecto_2.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,UserName")] Usuario usuario)
+        public async Task<ActionResult> Create([Bind(Include = "Email,Password")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                var logic = new UsuarioLogica();
-                logic.crearUsuario(usuario);
-                return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = usuario.Email, Email = usuario.Email };
+                var result = await UserManager.CreateAsync(user, usuario.Password);
+                if (result.Succeeded)
+                {
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    var roleResult = UserManager.AddToRole(currentUser.Id, "Administrador");
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(usuario);
