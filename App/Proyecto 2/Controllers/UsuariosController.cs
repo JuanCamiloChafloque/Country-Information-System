@@ -145,10 +145,10 @@ namespace Proyecto_2.Controllers
                 var logic = new UsuarioLogica();
                 logic.updateUsuario(usuario);
                 var currentUser = UserManager.FindByName(usuario.Email);
+                UserManager.RemoveFromRole(currentUser.Id, "Administrador");
+                UserManager.RemoveFromRole(currentUser.Id, "Usuario");
                 if (CRoles != null)
                 {
-                    UserManager.RemoveFromRole(currentUser.Id, "Administrador");
-                    UserManager.RemoveFromRole(currentUser.Id, "Usuario");
                     foreach (var r in CRoles)
                     {
                         var roleResult = UserManager.AddToRole(currentUser.Id, r);
