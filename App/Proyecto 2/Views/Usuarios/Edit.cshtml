@@ -26,24 +26,25 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(Model => Model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(Model => Model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <ul class="list-group">
                 @foreach (var r in ViewBag.CRoles)
                 {
-                    var check = false;
-                    foreach (var r2 in Model.Roles)
-                    { 
-                        if(r.Id == r2.Id)
-                        {
-                            check = true;
-                            break;
-                        }
+
+                    if (r.Id == ViewBag.IdRol)
+                    {
+                        <li class="list-group-item">
+                            <label><input type="radio" checked="checked" name="CRoles" value="@r.Nombre" />@r.Nombre</label>
+                        </li>
                     }
-                    <li class="list-group-item">
-                        <label><input type="checkbox" @(check ? "checked": "") name="CRoles" value="@r.Nombre" />@r.Nombre</label>
-                    </li>
+                    else
+                    {
+                        <li class="list-group-item">
+                            <label><input type="radio" name="CRoles" value="@r.Nombre" />@r.Nombre</label>
+                        </li>
                     }
+                }
             </ul>
         </div>
     </div>

@@ -63,8 +63,10 @@ namespace Proyecto_2.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
+            var current = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             var logic = new UsuarioLogica();
             var listUsuarios = logic.obtenerUsuarios();
+            ViewBag.Current = current.Id;
             return View(listUsuarios);
         }
 
@@ -76,7 +78,9 @@ namespace Proyecto_2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var logic = new UsuarioLogica();
+            var current = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             Usuario usuario = logic.getUsuarioById(id);
+            ViewBag.Current = current.Id;
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -128,6 +132,7 @@ namespace Proyecto_2.Controllers
             var logic = new UsuarioLogica();
             Usuario usuario = logic.getUsuarioById(id);
             ViewBag.CRoles = logic.obtenerRoles();
+            ViewBag.IdRol = usuario.Rol.Id;
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -145,10 +150,10 @@ namespace Proyecto_2.Controllers
                 var logic = new UsuarioLogica();
                 logic.updateUsuario(usuario);
                 var currentUser = UserManager.FindByName(usuario.Email);
+                UserManager.RemoveFromRole(currentUser.Id, "Administrador");
+                UserManager.RemoveFromRole(currentUser.Id, "Usuario");
                 if (CRoles != null)
                 {
-                    UserManager.RemoveFromRole(currentUser.Id, "Administrador");
-                    UserManager.RemoveFromRole(currentUser.Id, "Usuario");
                     foreach (var r in CRoles)
                     {
                         var roleResult = UserManager.AddToRole(currentUser.Id, r);

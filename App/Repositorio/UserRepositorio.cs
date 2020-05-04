@@ -19,11 +19,11 @@ namespace Repositorio
                     Id = u.Id,
                     Email = u.Email,
                     UserName = u.UserName,
-                    Roles = u.AspNetRoles.Select(r => new Rol
+                    Rol = u.AspNetRoles.Select(r => new Rol
                     {
                         Id = r.Id,
                         Nombre = r.Name
-                    }).ToList()
+                    }).FirstOrDefault()
                 }).ToList();
 
                 return list;
@@ -53,11 +53,11 @@ namespace Repositorio
                     Id = u.Id,
                     Email = u.Email,
                     UserName = u.UserName,
-                    Roles = u.AspNetRoles.Select(r => new Rol
+                    Rol = u.AspNetRoles.Select(r => new Rol
                     {
                         Id = r.Id,
                         Nombre = r.Name
-                    }).ToList()
+                    }).FirstOrDefault()
                 }).FirstOrDefault(u => u.Id == id);
 
                 return usuario;

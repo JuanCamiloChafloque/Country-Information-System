@@ -31,13 +31,13 @@
     </div>
     
     <div class="form-group">
-        @Html.LabelFor(Model => Model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(Model => Model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <ul class="list-group">
                 @foreach (var r in ViewBag.CRoles)
                 {
                     <li class="list-group-item">
-                        <label><input type="checkbox" name="CRoles" value="@r.Nombre"/>@r.Nombre</label>
+                        <label><input type="radio" name="CRoles" value="@r.Nombre"/>@r.Nombre</label>
                     </li>
                 }
             </ul>

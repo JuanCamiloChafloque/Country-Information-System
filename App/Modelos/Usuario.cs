@@ -21,7 +21,7 @@ namespace Modelos
         [Display (Name = "Contraseña del usuario")]
         public String Password { get; set; }
 
-        [Display (Name = "Roles del usuario")]
-        public List<Rol> Roles { get; set; }
+        [Display (Name = "Rol del usuario")]
+        public Rol Rol { get; set; }
     }
 }
