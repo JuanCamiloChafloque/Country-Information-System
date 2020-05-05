@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Logica;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -139,6 +140,9 @@ namespace Proyecto_2.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var logic = new UsuarioLogica();
+            var roles = logic.obtenerRoles();
+            ViewBag.CRoles = roles;
             return View();
         }
 
@@ -147,7 +151,7 @@ namespace Proyecto_2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, String[] CRoles)
         {
             if (ModelState.IsValid)
             {
@@ -155,6 +159,14 @@ namespace Proyecto_2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    if (CRoles != null)
+                    {
+                        foreach (var r in CRoles)
+                        {
+                            var roleResult = UserManager.AddToRole(currentUser.Id, r);
+                        }
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771

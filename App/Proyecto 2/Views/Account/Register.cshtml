@@ -29,6 +29,21 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.Label("Rol a asignar", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <ul class="list-group">
+                @foreach (var r in ViewBag.CRoles)
+                {
+                    <li class="list-group-item">
+                        <label><input type="radio" name="CRoles" value="@r.Nombre" />@r.Nombre</label>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Registrarse" />
