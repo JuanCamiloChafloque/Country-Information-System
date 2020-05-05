@@ -143,13 +143,18 @@ namespace Proyecto_2.Controllers
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,UserName")] Usuario usuario, String[] CRoles)
+        public ActionResult Edit([Bind(Include = "Id,Email,Password")] Usuario usuario, String[] CRoles)
         {
             if (ModelState.IsValid)
             {
                 var logic = new UsuarioLogica();
                 logic.updateUsuario(usuario);
                 var currentUser = UserManager.FindByName(usuario.Email);
+                if(usuario.Password != null)
+                {
+                    UserManager.RemovePassword(currentUser.Id);
+                    UserManager.AddPassword(currentUser.Id, usuario.Password);
+                }
                 UserManager.RemoveFromRole(currentUser.Id, "Administrador");
                 UserManager.RemoveFromRole(currentUser.Id, "Usuario");
                 if (CRoles != null)
